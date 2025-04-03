@@ -1,0 +1,46 @@
+@startuml class_diagram
+
+class TravelPackage {
+    +id : int
+    +name : string
+    +description : string
+    +price : float
+    +duration : int
+    +destination : string
+    +__construct(id, name, description, price, duration, destination)
+    +displayDetails() : string
+}
+
+class Customer {
+    +id : int
+    +name : string
+    +email : string
+    +phone : string
+    +__construct(id, name, email, phone)
+    +getContactInfo() : string
+}
+
+class Booking {
+    +id : int
+    +customer : Customer
+    +travelPackage : TravelPackage
+    +bookingDate : string
+    +__construct(id, customer, travelPackage, bookingDate)
+    +getBookingDetails() : string
+}
+
+class Payment {
+    +id : int
+    +booking : Booking
+    +amount : float
+    +paymentDate : string
+    +status : string
+    +__construct(id, booking, amount, paymentDate, status)
+    +getPaymentDetails() : string
+}
+
+Customer "1" -- "*" Booking : makes
+TravelPackage "1" -- "*" Booking : is booked in
+Booking "1" -- "1" Payment : has
+
+@enduml
