@@ -82,10 +82,37 @@ class Payment {
     }
 }
 class AuxiliarryDataBaseFunctions {
+    private static $db = null;
+    public function __construct() {
+        // Initialize the database connection
+        if (self::$db === null) {
+            try {
+                self::$db = new PDO('mysql:host=localhost;dbname=unique_destination_website', 'root', '');
+                self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+        }
+    }
+    public static function getInstance() {
+        if (self::$db === null) {
+            new AuxiliarryDataBaseFunctions();
+        }
+        return self::$db;
+    }
+
     function getDatabaseConnection() {
-        // Simulate a database connection
-        static $db = null;
-        return new PDO('mysql:host=localhost;dbname=travel_agency', 'root', '');
+        //initialize a database connection
+        if(self::$db === null)
+        {
+            self::getInstance();
+            return self::$db;
+        }
+        else
+        {
+            return self::$db;
+        }
+    
     }
     function getTravelPackages() {
         $db = $this->getDatabaseConnection();
@@ -102,6 +129,18 @@ class AuxiliarryDataBaseFunctions {
         $stmt = $db->query("SELECT * FROM bookings");
         return $stmt->fetchAll(PDO::FETCH_CLASS, 'Booking');
     }
+}
+
+$dbFunctions1 = new AuxiliarryDataBaseFunctions();
+$db1 = $dbFunctions1->getDatabaseConnection();
+
+$dbFunctions2 = new AuxiliarryDataBaseFunctions();
+$db2 = $dbFunctions2->getDatabaseConnection();
+
+if ($db1 === $db2) {
+    echo "Singleton works! Both instances are the same.";
+} else {
+    echo "Singleton failed! Instances are different.";
 }
 
 ?>
