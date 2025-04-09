@@ -1,7 +1,7 @@
 <?php
 require_once 'Connection.php';
 // Class to represent a Travel Package
-class TravelPackage {
+class TravelPackage  {
     public $id;
     public $name;
     public $description;
@@ -35,6 +35,6 @@ class TravelPackage {
     }
     
 }
-//$a=new TravelPackage(1);
-//echo nl2br($a->getPackageDetails());
+// $a=new TravelPackage(5);
+// echo nl2br($a->getPackageDetails());
 ?>
