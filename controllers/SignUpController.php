@@ -2,50 +2,65 @@
 require_once '../models/ManualSignUp.php';
 require_once '../models/FacebookSignUp.php';
 require_once '../models/GoogleSignUp.php';
-require_once '../models/Connection.php';
 
 class SignUpController {
     private $strategy;
 
-    // Set the strategy dynamically
     public function setStrategy($strategy) {
         $this->strategy = $strategy;
     }
 
-    // Perform the sign-up process
     public function signUp($data) {
         if (!$this->strategy) {
             throw new Exception("No sign-up strategy set.");
         }
-
-        // Execute the strategy's sign-up logic
-        $result = $this->strategy->signUp($data);
-
-        // Save user data to the database
-        $this->saveUserToDatabase($data);
-
-        return $result;
+        return $this->strategy->signUp($data);
     }
 
-    // Save user data to the database
-    private function saveUserToDatabase($data) {
-        $conn = Connection::getInstance()->getConnection();
-
-        // Prepare the SQL query
-        $query = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
-        $stmt = $conn->prepare($query);
-
-        // Hash the password if it exists (manual sign-up)
-        $password = isset($data['password']) ? password_hash($data['password'], PASSWORD_BCRYPT) : null;
-
-        // Bind parameters and execute the query
-        $stmt->bind_param("sss", $data['name'], $data['email'], $password);
-
-        if (!$stmt->execute()) {
-            throw new Exception("Error saving user to database: " . $stmt->error);
+    public function handleRequest($data) {
+        // Ensure the request method is POST
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            throw new Exception("Invalid request method.");
         }
 
-        $stmt->close();
+        // Validate the 'method' field
+        if (!isset($data['method'])) {
+            throw new Exception("Sign-up method is required.");
+        }
+
+        $method = $data['method'];
+
+        // Dynamically set the strategy based on the selected method
+        switch ($method) {
+            case 'manual':
+            
+                if (empty($data['name']) || empty($data['email']) || empty($data['password'])) {
+                    return $data['name'].$data['email'];
+                    throw new Exception("Name, email, and password are required for manual sign-up.");
+                }
+                $this->setStrategy(new ManualSignUp($data['name'], $data['email'], $data['password']));
+                break;
+
+            case 'facebook':
+                if (empty($data['facebook_id']) || empty($data['facebook_token'])) {
+                    throw new Exception("Facebook ID or facebook token is required for Facebook sign-up.");
+                }
+                $this->setStrategy(new FacebookSignUp());
+                break;
+
+            case 'google':
+                if (empty($data['google_id']) || empty($data['google_token'])) {
+                    throw new Exception("Google ID or google token is required for Google sign-up.");
+                }
+                $this->setStrategy(new GoogleSignUp());
+                break;
+
+            default:
+                throw new Exception("Invalid sign-up method.");
+        }
+
+        // Perform the sign-up process
+        return $this->signUp($data);
     }
 }
 ?>

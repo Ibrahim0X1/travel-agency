@@ -13,7 +13,7 @@ class ManualSignUp {
         $this->password = password_hash($password, PASSWORD_BCRYPT);
     }
 
-    public function register() {
+    public function signUp(){
         $conn = Connection::getInstance()->getConnection();
 
         // Use a prepared statement to insert data
@@ -26,15 +26,15 @@ class ManualSignUp {
 
             // Execute the statement
             if ($stmt->execute()) {
-                echo "User registered successfully!";
+                return "User registered successfully!";
             } else {
-                echo "Error: " . $stmt->error;
+                return "Error: " . $stmt->error;
             }
 
             // Close the statement
             $stmt->close();
         } else {
-            echo "Error: " . $conn->error;
+            return "Error: " . $conn->error;
         }
     }
 }
