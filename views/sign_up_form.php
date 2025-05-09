@@ -15,7 +15,7 @@
 
         /* Background Styling */
         body {
-            background: linear-gradient(135deg,rgb(219, 47, 13),rgb(35, 20, 244));
+            background: linear-gradient(135deg,rgb(32, 19, 19),rgb(176, 81, 3));
             display: flex;
             justify-content: center;
             align-items: center;
@@ -24,11 +24,11 @@
 
         /* Form Container */
         .form-container {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(248, 248, 248, 0.9);
             border-radius: 10px;
             padding: 30px;
             width: 400px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(255, 136, 0, 0.2);
             color: #333;
         }
 
@@ -37,7 +37,7 @@
             text-align: center;
             margin-bottom: 20px;
             font-size: 24px;
-            color: #6a11cb;
+            color:rgb(244, 60, 4);
         }
 
         /* Form Labels */
@@ -68,7 +68,7 @@
         .form-container button {
             width: 100%;
             padding: 10px;
-            background: #6a11cb;
+            background:rgb(244, 60, 4);
             border: none;
             border-radius: 5px;
             color: #fff;
@@ -78,7 +78,7 @@
         }
 
         .form-container button:hover {
-            background: #2575fc;
+            background:rgb(146, 35, 1);
         }
 
         /* Toggle Fields */

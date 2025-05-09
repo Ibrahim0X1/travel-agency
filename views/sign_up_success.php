@@ -29,7 +29,7 @@ try {
 
         /* Background Styling */
         body {
-            background: linear-gradient(135deg,rgb(219, 47, 13),rgb(35, 20, 244));
+            background: linear-gradient(135deg,rgb(32, 19, 19),rgb(176, 81, 3));
             display: flex;
             justify-content: center;
             align-items: center;
@@ -50,7 +50,7 @@ try {
         /* Title */
         .result-container h1 {
             font-size: 24px;
-            color: #ff758c;
+            color: rgb(244, 60, 4);
             margin-bottom: 20px;
         }
 
@@ -64,7 +64,7 @@ try {
         .result-container a {
             display: inline-block;
             padding: 10px 20px;
-            background: #ff758c;
+            background: rgb(244, 60, 4);
             color: #fff;
             text-decoration: none;
             border-radius: 5px;
@@ -73,7 +73,7 @@ try {
         }
 
         .result-container a:hover {
-            background: #ff4d6d;
+            background:rgb(146, 35, 1)
         }
     </style>
 </head>
@@ -81,7 +81,7 @@ try {
     <div class="result-container">
         <h1>Sign Up Result</h1>
         <p><?php echo htmlspecialchars($result); ?></p>
-        <a href="sign_up_form.php">Go Back</a>
+        <a href="home.php">Go Home</a>
     </div>
 </body>
 </html>
