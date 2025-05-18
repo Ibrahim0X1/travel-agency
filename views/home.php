@@ -5,48 +5,129 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Explore Egypt - Travel Agency</title>
     <style>
-        /* General Reset */
         body, html {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            color: #4b2e2e; /* Brown */
+            color: #4b2e2e;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f4a460 0%, #8b4513 40%, #b22222 100%);
         }
 
-        /* Hero Section */
+        /* Fixed Top Bar */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(270deg,rgb(202, 67, 0) 1%,rgb(0, 0, 0) 100%);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0px 24px;
+            z-index: 1000;
+            box-shadow: 0 2px 8px #0002;
+        }
+        .logo {
+            font-size: 1.8rem;
+            color:rgb(255, 255, 255);
+            /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
+            font-weight: bold;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            /* -webkit-text-stroke: 0.5px rgb(0, 0, 0); */
+            /* text-stroke: 1px #fff; */
+         /* Optional: add a subtle shadow for more contrast */
+             /* text-shadow: 1px 1px 2px #fff8, 2px 2px 6px #0002; */
+        }
+    
+
+        .dashboard-icon {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2.4rem; /* bigger icon */
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background 0.2s;
+            position: relative;
+            margin-right: 24px; /* shift left from scrollbar */
+        }
+    
+        .dashboard-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 56px;
+            background: #fff;
+            color: #4b2e2e;
+            min-width: 220px; /* bigger menu */
+            border-radius: 10px;
+            box-shadow: 0 4px 16px #0002;
+            z-index: 2000;
+            padding: 18px 0;
+            animation: fadeIn 0.2s;
+        }
+        .dashboard-menu.show {
+            display: block;
+        }
+        .dashboard-menu a {
+            display: block;
+            padding: 18px 32px;
+            color: #4b2e2e;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: background 0.2s, color 0.2s;
+            letter-spacing: 1px;
+        }
+        .dashboard-menu a:hover {
+            background: #f4a460;
+            color: #b22222;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
         .hero {
             background: url('https://upload.wikimedia.org/wikipedia/commons/e/e3/Kheops-Pyramid.jpg') no-repeat center center/cover;
-            height: 100vh;
+            min-height: 40vh;
             display: flex;
             justify-content: center;
             align-items: center;
             color: #fff;
             text-align: center;
+            flex-direction: column;
+            padding: 170px 10px 20px 10px;
+            margin-top: 56px; /* Space for top bar */
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin: 0;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
         }
 
         .hero p {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             margin-top: 10px;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
         }
 
-        /* Destinations Section */
         .destinations {
-            padding: 50px 20px;
-            background:rgb(252, 241, 225); /* Dark Orange */
+            padding: 30px 5vw;
+            background: rgba(252, 241, 225, 0.95);
         }
 
         .destinations h2 {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2rem;
             margin-bottom: 30px;
-            color:rgb(0, 0, 0); /* Dark Red */
+            color: #b22222;
         }
 
         .destination {
@@ -54,31 +135,39 @@
             flex-wrap: wrap;
             margin-bottom: 40px;
             align-items: center;
+            background: linear-gradient(90deg, #fff8f0 60%, #f4a46022 100%);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px #8b451322;
+            overflow: hidden;
         }
 
         .destination img {
-            width: 600px; /* Fixed width */
-            height:400px; /* Fixed height */
-            object-fit: cover; /* Ensures the image fits within the dimensions without distortion */
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 12px 0 0 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
             opacity: 1;
-            transition: opacity 1s ease-in-out; /* Smooth transition */
+            transition: opacity 2s ease-in-out;
+            background: #eee;
+            flex-shrink: 0;
         }
 
         .destination img.hidden {
-            opacity: 0; /* Fade out effect */
+            opacity: 0;
         }
 
         .destination-content {
-            width: calc(100% - 320px); /* Adjust width to fit next to the fixed image size */
+            flex: 1 1 200px;
             padding: 20px;
+            min-width: 200px;
         }
 
         .destination-content h3 {
-            font-size: 1.8rem;
+            font-size: 1.3rem;
             margin-bottom: 10px;
-            color: #8b4513; /* Dark Orange */
+            color: #8b4513;
         }
 
         .destination-content p {
@@ -86,30 +175,86 @@
             line-height: 1.6;
         }
 
-        /* Footer */
         footer {
-            background: #4b2e2e; /* Brown */
+            background: #4b2e2e;
             color: #fff;
             text-align: center;
-            padding: 20px;
+            padding: 20px 10px;
         }
 
-        footer p {
-            margin: 0;
+        @media (max-width: 900px) {
+            .destination {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .destination img {
+                border-radius: 12px 12px 0 0;
+                max-width: 100%;
+                height: 180px;
+            }
+            .destination-content {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .top-bar {
+                flex-direction: column;
+                height: auto;
+                padding: 8px 8px;
+            }
+            .logo {
+                font-size: 1.1rem;
+                margin-bottom: 4px;
+            }
+            .dashboard-icon {
+                font-size: 1.5rem;
+                padding: 6px;
+            }
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .destinations {
+                padding: 15px 2vw;
+            }
+            .destination-content h3 {
+                font-size: 1.1rem;
+            }
+            .destination-content p {
+                font-size: 0.95rem;
+            }
+            .destination img {
+                height: 130px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <div class="hero">
-        <div>
-            <h1>Welcome to Explore Egypt</h1>
-            <p>Discover the beauty and history of Egypt's most iconic destinations</p>
+    <!-- Fixed Top Bar -->
+    <div class="top-bar">
+        <span class="logo">UNIQUE DESTINATIONS</span>
+        <div style="position:relative;">
+            <button class="dashboard-icon" id="dashboardMenuBtn" aria-label="Dashboard Menu">&#9776;</button>
+            <div class="dashboard-menu" id="dashboardMenu">
+                <a href="sign_up_form.php">Sign Up</a>
+                <a href="sign in.php">Sign In</a>
+                <a href="#destinations">Destinations</a>
+                <a href="search_guide.php">Search for a Guide</a>
+            </div>
         </div>
     </div>
 
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Welcome to Explore Egypt</h1>
+        <p>Discover the beauty and history of Egypt's most iconic destinations</p>
+    </div>
+
     <!-- Destinations Section -->
-    <div class="destinations">
+    <div class="destinations" id="destinations">
         <h2>Our Top Destinations</h2>
 
         <!-- Destination 1: Siwa Oasis -->
@@ -146,23 +291,36 @@
     </footer>
 
     <script>
+        // Dashboard menu toggle
+        const dashboardBtn = document.getElementById('dashboardMenuBtn');
+        const dashboardMenu = document.getElementById('dashboardMenu');
+        document.addEventListener('click', function(e) {
+            if (dashboardBtn.contains(e.target)) {
+                dashboardMenu.classList.toggle('show');
+                dashboardBtn.classList.toggle('active');
+            } else if (!dashboardMenu.contains(e.target)) {
+                dashboardMenu.classList.remove('show');
+                dashboardBtn.classList.remove('active');
+            }
+        });
+
         // Smooth Slideshow for Siwa Oasis
         const siwaImages = ["R.jpg", "OIP.jpg"];
         let siwaIndex = 0;
         const siwaImageElement = document.getElementById("siwa-image");
 
         setInterval(() => {
-            const nextIndex = (siwaIndex + 1) % siwaImages.length; // Calculate next image index
-            const nextImage = new Image(); // Preload the next image
+            const nextIndex = (siwaIndex + 1) % siwaImages.length;
+            const nextImage = new Image();
             nextImage.src = siwaImages[nextIndex];
 
-            siwaImageElement.classList.add("hidden"); // Start fade-out
+            siwaImageElement.classList.add("hidden");
             setTimeout(() => {
-                siwaImageElement.src = nextImage.src; // Update the image source
-                siwaImageElement.classList.remove("hidden"); // Start fade-in
-            }, 1000); // Match the fade-out duration
-            siwaIndex = nextIndex; // Update the current index
-        }, 5000); // 6 seconds per image
+                siwaImageElement.src = nextImage.src;
+                siwaImageElement.classList.remove("hidden");
+            }, 2000); // 2s fade
+            siwaIndex = nextIndex;
+        }, 6000);
 
         // Smooth Slideshow for Pyramids of Giza
         const pyramidsImages = [
@@ -181,7 +339,7 @@
             setTimeout(() => {
                 pyramidsImageElement.src = nextImage.src;
                 pyramidsImageElement.classList.remove("hidden");
-            }, 1000);
+            }, 2000);
             pyramidsIndex = nextIndex;
         }, 6000);
 
@@ -202,7 +360,7 @@
             setTimeout(() => {
                 luxorImageElement.src = nextImage.src;
                 luxorImageElement.classList.remove("hidden");
-            }, 1000);
+            }, 2000);
             luxorIndex = nextIndex;
         }, 6000);
     </script>
