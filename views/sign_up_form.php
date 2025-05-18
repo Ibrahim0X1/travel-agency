@@ -136,6 +136,7 @@
     <div class="form-container">
         <h1>Sign Up</h1>
         <form action="sign_up_success.php" method="POST">
+            <input type="hidden" name="method" value="manual">
             <label>Name:</label>
             <input type="text" name="name" required>
             <label>Email:</label>
