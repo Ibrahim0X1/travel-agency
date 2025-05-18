@@ -35,7 +35,7 @@ class SignUpController {
             case 'manual':
             
                 if (empty($data['name']) || empty($data['email']) || empty($data['password'])) {
-                    return $data['name'].$data['email'];
+                    
                     throw new Exception("Name, email, and password are required for manual sign-up.");
                 }
                 $this->setStrategy(new ManualSignUp($data['name'], $data['email'], $data['password']));
