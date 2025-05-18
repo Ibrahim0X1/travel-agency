@@ -17,12 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->fetch();
         if (password_verify($password, $hashedPassword)) {
             $_SESSION['user_id'] = $userId;
-            header("Location: dashboard.php");
+            header("Location: /travel_agency_project/views/dashboard.php");
             exit;
         }
     }
     // If we reach here, login failed
-    header("Location: sign_in.php?error=1");
+    header("Location: /travel_agency_project/views/sign in.php?error=1");
     exit;
 }
 ?>

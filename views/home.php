@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -236,11 +239,25 @@
     <!-- Fixed Top Bar -->
     <div class="top-bar">
         <span class="logo">UNIQUE DESTINATIONS</span>
-        <div style="position:relative;">
+        <div style="position:relative; display:flex; align-items:center;">
+            <?php if (isset($_SESSION['user_id']) && isset($_SESSION['Name'])): ?>
+                <span style="color:#fff; font-weight:bold; margin-right:18px; font-size:1.1rem;">
+                    &#128100; <?php echo htmlspecialchars($_SESSION['user_name']); ?>
+                </span>
+            <?php elseif (isset($_SESSION['user_id'])): ?>
+                <span style="color:#fff; font-weight:bold; margin-right:18px; font-size:1.1rem;">
+                    &#128100; Signed in
+                </span>
+            <?php endif; ?>
             <button class="dashboard-icon" id="dashboardMenuBtn" aria-label="Dashboard Menu">&#9776;</button>
             <div class="dashboard-menu" id="dashboardMenu">
-                <a href="sign_up_form.php">Sign Up</a>
-                <a href="sign in.php">Sign In</a>
+                <?php if (!isset($_SESSION['user_id'])): ?>
+                    <a href="sign_up_form.php">Sign Up</a>
+                    <a href="sign in.php">Sign In</a>
+                <?php else: ?>
+                    <a href="dashboard.php">Dashboard</a>
+                    <a href="sign out.php">Sign Out</a>
+                <?php endif; ?>
                 <a href="#destinations">Destinations</a>
                 <a href="search_guide.php">Search for a Guide</a>
             </div>
