@@ -1,15 +1,45 @@
 <?php
-require_once '../models/Trip.php';
-require_once '../models/Flight.php';
-require_once '../models/Meals.php';
-require_once '../models/Accommodation.php';
+require_once __DIR__ . '/../models/Trip.php';
+require_once __DIR__ . '/../models/Flight.php';
+require_once __DIR__ . '/../models/Meals.php';
+require_once __DIR__ . '/../models/Accommodation.php';
+
+require_once __DIR__ . '/../models/Commands/Command.php';
+require_once __DIR__ . '/../models/Commands/BookTripCommand.php';
+require_once __DIR__ . '/../models/BookingService.php';
 
 class TripController {
     private $trip;
+    private $commandHistory = [];
+    private $bookingService;
 
     public function __construct() {
         // Initialize the base trip
         $this->trip = new Trip();
+        $this->bookingService = new BookingService();
+    }
+
+    public function bookTrip($customer, $bookingDate): string {
+        $command = new BookTripCommand(
+            $this->bookingService,
+            $customer,
+            $this->trip,
+            $bookingDate
+        );
+
+        if ($command->execute()) {
+            $this->commandHistory[] = $command;
+            return $command->getBookingId();
+        }
+        return false;
+    }
+
+    public function cancelLastBooking(): bool {
+        if (!empty($this->commandHistory)) {
+            $command = array_pop($this->commandHistory);
+            return $command->undo();
+        }
+        return false;
     }
 
     public function addService($service) {
