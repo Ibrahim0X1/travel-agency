@@ -240,7 +240,7 @@ session_start();
     <div class="top-bar">
         <span class="logo">UNIQUE DESTINATIONS</span>
         <div style="position:relative; display:flex; align-items:center;">
-            <?php if (isset($_SESSION['user_id']) && isset($_SESSION['Name'])): ?>
+            <?php if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])): ?>
                 <span style="color:#fff; font-weight:bold; margin-right:18px; font-size:1.1rem;">
                     &#128100; <?php echo htmlspecialchars($_SESSION['user_name']); ?>
                 </span>
