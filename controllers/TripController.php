@@ -7,6 +7,7 @@ require_once __DIR__ . '/../models/Accommodation.php';
 require_once __DIR__ . '/../models/Commands/Command.php';
 require_once __DIR__ . '/../models/Commands/BookTripCommand.php';
 require_once __DIR__ . '/../models/BookingService.php';
+require_once __DIR__ . '/../models/TravelPackageModel.php';
 
 class TripController {
     private $trip;

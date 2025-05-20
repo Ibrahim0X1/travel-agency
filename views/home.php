@@ -289,7 +289,7 @@ session_start();
             <div class="dashboard-menu" id="dashboardMenu">
                 <?php if (!isset($_SESSION['user_id'])): ?>
                     <a href="sign_up_form.php">Sign Up</a>
-                    <a href="sign in.php">Sign In</a>
+                    <a href="sign_in.php">Sign In</a>
                 <?php else: ?>
                     <a href="dashboard.php">Dashboard</a>
                     <a href="sign out.php">Sign Out</a>

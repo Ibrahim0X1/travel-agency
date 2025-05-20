@@ -1,3 +1,19 @@
+<?php
+$errorMessage = '';
+if (isset($_GET['error'])) {
+    switch ($_GET['error']) {
+        case 'blocked':
+            $errorMessage = "🚫 Your account has been blocked. Please contact support.";
+            break;
+        case '1':
+            $errorMessage = "❌ Incorrect email or password.";
+            break;
+        case 'server':
+            $errorMessage = "⚠️ A server error occurred. Please try again.";
+            break;
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +51,16 @@
             color: rgb(244, 60, 4);
             letter-spacing: 1px;
         }
+        .error-box {
+            background-color: #ffdddd;
+            border-left: 6px solid #f44336;
+            padding: 12px;
+            margin-bottom: 18px;
+            color: #a94442;
+            font-weight: bold;
+            font-size: 0.95rem;
+            border-radius: 6px;
+        }
         .form-container label {
             display: block;
             margin-bottom: 10px;
@@ -56,7 +82,7 @@
         .form-container button {
             width: 100%;
             padding: 12px;
-            background: rgb(244, 60, 4);;
+            background: rgb(244, 60, 4);
             border: none;
             border-radius: 6px;
             color: #fff;
@@ -93,7 +119,12 @@
 <body>
     <div class="form-container">
         <h1>Sign In</h1>
-        <form action="/travel_agency_project/controllers/sign_in_process.php" method="POST">
+
+        <?php if (!empty($errorMessage)) : ?>
+            <div class="error-box"><?= htmlspecialchars($errorMessage) ?></div>
+        <?php endif; ?>
+
+        <form action="../controllers/sign_in_process.php" method="POST">
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required autocomplete="username">
 

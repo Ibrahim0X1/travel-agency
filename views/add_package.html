@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Travel Package</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f0f8ff;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            width: 300px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px #aaa;
+        }
+        input, textarea, button {
+            display: block;
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 8px;
+        }
+        button {
+            cursor: pointer;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+        }
+        button.cancel {
+            background-color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <h2>Add Travel Package</h2>
+    <form action="../controllers/add_package.php" method="POST">
+        <input type="text" name="name" placeholder="Package Name" required>
+        <textarea name="description" placeholder="Description" required></textarea>
+        <input type="number" name="price" placeholder="Price" required>
+        <input type="number" name="duration" placeholder="Duration (days)" required>
+        <input type="text" name="destination" placeholder="Destination" required>
+        <button type="submit" name="action" value="add">Add Package</button>
+        <button type="submit" name="action" value="cancel" class="cancel">Cancel Last Add</button>
+    </form>
+</body>
+</html>
