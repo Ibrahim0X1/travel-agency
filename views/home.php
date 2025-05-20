@@ -185,6 +185,37 @@ session_start();
             padding: 20px 10px;
         }
 
+        /* Notification Bell Styles */
+        .notification-bell {
+            position: relative;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            margin-right: 18px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .notification-bell:hover {
+            color: #f4a460;
+        }
+        .notification-count {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: #b22222;
+            color: #fff;
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            min-width: 22px;
+            text-align: center;
+            border: 2px solid #fff;
+            box-shadow: 0 1px 4px #0002;
+            pointer-events: none;
+        }
+
         @media (max-width: 900px) {
             .destination {
                 flex-direction: column;
@@ -249,6 +280,11 @@ session_start();
                     &#128100; Signed in
                 </span>
             <?php endif; ?>
+            <!-- Notification Bell -->
+            <a href="/travel_agency_project/controllers/NotificationsController.php" class="notification-bell" id="notificationBell" aria-label="Notifications">
+                &#128276;
+                <span class="notification-count" id="notificationCount">0</span>
+            </a>
             <button class="dashboard-icon" id="dashboardMenuBtn" aria-label="Dashboard Menu">&#9776;</button>
             <div class="dashboard-menu" id="dashboardMenu">
                 <?php if (!isset($_SESSION['user_id'])): ?>
@@ -380,6 +416,24 @@ session_start();
             }, 2000);
             luxorIndex = nextIndex;
         }, 6000);
+
+        function updateNotificationCount() {
+    fetch('/travel_agency_project/controllers/get_notifications.php')
+        .then(response => response.json())
+        .then(data => {
+            // Count unread notifications
+            let unread = 0;
+            data.forEach(n => { if (n.read == 0) unread++; });
+            const countSpan = document.getElementById('notificationCount');
+            countSpan.textContent = unread;
+            countSpan.style.display = 'inline-block';
+            countSpan.setAttribute('data-zero', unread === 0 ? 'true' : 'false');
+        });
+}
+
+// Update on page load and every 30 seconds
+updateNotificationCount();
+setInterval(updateNotificationCount, 30000);
     </script>
 </body>
 </html>
