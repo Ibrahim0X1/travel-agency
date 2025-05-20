@@ -1,17 +1,3 @@
-<?php
-require_once '../controllers/SignUpController.php';
-
-$result = "";
-
-try {
-    // Initialize the controller and handle the request
-    $controller = new SignUpController();
-    $result = $controller->handleRequest($_POST);
-
-} catch (Exception $e) {
-    $result = "Error: " . $e->getMessage();
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,7 +67,7 @@ try {
     <div class="result-container">
         <h1>Sign Up Result</h1>
         <p><?php echo htmlspecialchars($result); ?></p>
-        <a href="home.php">Go Home</a>
+        <a href="../views/home.php">Go Home</a>
     </div>
 </body>
 </html>
