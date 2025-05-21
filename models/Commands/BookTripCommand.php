@@ -1,4 +1,6 @@
     <?php
+    require_once __DIR__ . '/Command.php';
+
     class BookTripCommand implements Command{
         private $bookingService;
         private $customer;

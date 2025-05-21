@@ -275,32 +275,31 @@ session_start();
         <h2>Our Top Destinations</h2>
 
         <!-- Destination 1: Siwa Oasis -->
-        <div class="destination">
-            <img id="siwa-image" src="R.jpg" alt="Siwa Oasis">
-            <div class="destination-content">
-                <h3>Siwa Oasis</h3>
-                <p>Siwa Oasis is a hidden gem in the Western Desert of Egypt. Known for its stunning landscapes, salt lakes, and ancient ruins, Siwa offers a tranquil escape from the bustling cities. Explore the Temple of the Oracle and enjoy the serene beauty of this unique destination.</p>
-            </div>
-        </div>
-
-        <!-- Destination 2: The Pyramids of Giza -->
-        <div class="destination">
-            <img id="pyramids-image" src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Kheops-Pyramid.jpg" alt="Pyramids of Giza">
-            <div class="destination-content">
-                <h3>Pyramids of Giza</h3>
-                <p>The Pyramids of Giza are one of the Seven Wonders of the Ancient World. These iconic structures, including the Great Pyramid of Khufu, are a testament to Egypt's rich history and architectural brilliance. Don't miss the Sphinx, a symbol of mystery and power.</p>
-            </div>
-        </div>
-
-        <!-- Destination 3: Luxor -->
-        <div class="destination">
-            <img id="luxor-image" src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Luxor_Temple.jpg" alt="Luxor Temple">
-            <div class="destination-content">
-                <h3>Luxor</h3>
-                <p>Luxor is often referred to as the world's greatest open-air museum. Home to the Valley of the Kings, Karnak Temple, and Luxor Temple, this city is a treasure trove of ancient Egyptian history. Experience the grandeur of the pharaohs in this remarkable destination.</p>
-            </div>
-        </div>
+<!-- Siwa Oasis -->
+<a href="book_trib.php?destination=Siwa Oasis" style="text-decoration: none;">
+    <div style="background:#fff0e5;padding:20px;margin:15px;border-radius:12px;box-shadow:0 4px 8px rgba(0,0,0,0.1);color:#5a3210;">
+        <h3 style="color:#8b4513;">Siwa Oasis</h3>
+        <p>Siwa Oasis is a hidden gem in the Western Desert of Egypt...</p>
     </div>
+</a>
+
+<!-- Pyramids of Giza -->
+<a href="book_trib.php?destination=Pyramids of Giza" style="text-decoration: none;">
+    <div style="background:#fff0e5;padding:20px;margin:15px;border-radius:12px;box-shadow:0 4px 8px rgba(0,0,0,0.1);color:#5a3210;">
+        <h3 style="color:#8b4513;">Pyramids of Giza</h3>
+        <p>The Pyramids of Giza are one of the Seven Wonders of the Ancient World...</p>
+    </div>
+</a>
+
+<!-- Luxor -->
+<a href="book_trib.php?destination=Luxor" style="text-decoration: none;">
+    <div style="background:#fff0e5;padding:20px;margin:15px;border-radius:12px;box-shadow:0 4px 8px rgba(0,0,0,0.1);color:#5a3210;">
+        <h3 style="color:#8b4513;">Luxor</h3>
+        <p>Luxor is often referred to as the world’s greatest open-air museum...</p>
+    </div>
+</a>
+
+
 
     <!-- Footer -->
     <footer>
