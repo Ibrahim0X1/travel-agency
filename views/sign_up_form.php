@@ -135,7 +135,7 @@
 <body>
     <div class="form-container">
         <h1>Sign Up</h1>
-        <form action="sign_up_success.php" method="POST">
+        <form action="../controllers/SignupSuccess.php" method="POST">
             <input type="hidden" name="method" value="manual">
             <label>Name:</label>
             <input type="text" name="name" required>
@@ -146,14 +146,14 @@
             <button type="submit">Sign Up</button>
         </form>
         <div class="social-buttons">
-            <form action="sign_up_success.php" method="POST" style="margin:0;">
+            <form action="../controllers/SignupSuccess.php" method="POST" style="margin:0;">
                 <input type="hidden" name="method" value="facebook">
                 <button type="submit" class="social-btn facebook-btn">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook Logo">
                     Sign Up with Facebook
                 </button>
             </form>
-            <form action="sign_up_success.php" method="POST" style="margin:0;">
+            <form action="../controllers/SignupSuccess.php" method="POST" style="margin:0;">
                 <input type="hidden" name="method" value="google">
                 <button type="submit" class="social-btn google-btn">
                     <img src="https://cdn.freebiesupply.com/logos/large/2x/google-icon-logo-png-transparent.png" alt="Google Logo">
